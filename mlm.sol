@@ -3,14 +3,15 @@
 pragma solidity >=0.5.0 <0.9.0;
 
 contract multiLevelMarkeing {
-    mapping(address => bool) user;
-    mapping(address => address) head;
+    mapping(address => bool) public user;
+    mapping(address => address) public head;
     uint256 public totalusers = 1;
 
-    address owner;
+    address public owner;
 
     constructor() {
         owner = msg.sender;
+        user[owner]=true;
     }
 
     function marketing(address _head) public payable {
@@ -19,6 +20,7 @@ contract multiLevelMarkeing {
         require(user[_head], "head is not available with us");
         head[msg.sender] = _head;
         totalusers++;
+        user[msg.sender]= true;
 
         address _heading = _head;
 
